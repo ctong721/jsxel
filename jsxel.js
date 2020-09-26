@@ -47,11 +47,11 @@ jsxel = {
 		ctx.fillRect(0,0,c.width,c.height)
 	},
 	
-	run: function(f){
+	run: function(f,t=100){
 		setInterval(function(){
 			f();
 			jsxel.frame_count++;
-		},100);
+		},t);
 	},
 
 	touchstart: function(f){
@@ -73,5 +73,25 @@ jsxel = {
 			jsxel.e = e || event;
 			f();
 		});
+	},
+
+	drawimg: function(img,x,y,w,h){
+		ctx.drawImage(img,x,y,w,h);
+	},
+
+	//context.drawImage(img,sx,sy,swidth,sheight,x,y,width,height);
+	sprite: function(img,x,y,x0,y0,w,h,f,ish){
+		var i = jsxel.frame_count%f;
+		if(ish){
+			ctx.drawImage(img,x0+i*w,y0,w,h,x,y,w,h);
+		}else{
+			ctx.drawImage(img,x0,y0+i*h,w,h,x,y,w,h);
+		}
+	},
+
+	newimg: function(src){
+		var img = new Image();
+		img.src = src;
+		return img;
 	},
 };
