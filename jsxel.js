@@ -80,12 +80,12 @@ jsxel = {
 	},
 
 	//context.drawImage(img,sx,sy,swidth,sheight,x,y,width,height);
-	sprite: function(img,x,y,x0,y0,w,h,f,ish){
+	sprite: function(img,x0,y0,w0,h0,x,y,w,h,f,ish){
 		var i = jsxel.frame_count%f;
 		if(ish){
-			ctx.drawImage(img,x0+i*w,y0,w,h,x,y,w,h);
+			ctx.drawImage(img,x0+i*w0,y0,w0,h0,x,y,w,h);
 		}else{
-			ctx.drawImage(img,x0,y0+i*h,w,h,x,y,w,h);
+			ctx.drawImage(img,x0,y0+i*h0,w0,h0,x,y,w,h);
 		}
 	},
 

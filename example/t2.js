@@ -1,6 +1,6 @@
-w = 7;
-h = 12;
-s = 48;
+w = 15;
+h = 25;
+s = 48/2;
 x = 0;
 y = 0;
 p1 = f(w,h,500,20);
@@ -91,6 +91,9 @@ function move(p1,user){
 window.onload = function(){
 	jsxel.init(w,h,s);
 	img = jsxel.newimg("1.png");
+	//img.width = 96;
+	//img.height = 96;
+
 	jsxel.touchstart(function(){
 		x = Math.floor(jsxel.e.touches[0].pageX);
 		y = Math.floor(jsxel.e.touches[0].pageY);
@@ -110,10 +113,10 @@ window.onload = function(){
 		for(i=0;i<user.length;i++){
 			if(user[i].zt == 1){
 				//jsxel.frect(user[i].x,user[i].y,1,1,jsxel.color[user[i].color]);
-				if(user[i].fx==0) jsxel.sprite(img,user[i].x*s,user[i].y*s,48*3,0,48,48,4,false);
-				if(user[i].fx==1) jsxel.sprite(img,user[i].x*s,user[i].y*s,0,0,48,48,4,false);
-				if(user[i].fx==2) jsxel.sprite(img,user[i].x*s,user[i].y*s,48,0,48,48,4,false);
-				if(user[i].fx==3) jsxel.sprite(img,user[i].x*s,user[i].y*s,48*2,0,48,48,4,false);
+				if(user[i].fx==0) jsxel.sprite(img,48*3,0,48,48,user[i].x*s,user[i].y*s,s,s,4,false);
+				if(user[i].fx==1) jsxel.sprite(img,0,0,48,48,user[i].x*s,user[i].y*s,s,s,4,false);
+				if(user[i].fx==2) jsxel.sprite(img,48,0,48,48,user[i].x*s,user[i].y*s,s,s,4,false);
+				if(user[i].fx==3) jsxel.sprite(img,48*2,0,48,48,user[i].x*s,user[i].y*s,s,s,4,false);
 			}
 		}
 		jsxel.text(10,30,jsxel.frame_count,jsxel.color[1])
@@ -122,10 +125,6 @@ window.onload = function(){
 		jsxel.text(200,30,user[2].eat,jsxel.color[user[2].color]);
 		jsxel.text(250,30,x,jsxel.color[1]);
 		jsxel.text(300,30,y,jsxel.color[1]);
-		//jsxel.sprite(img,x,y,0,0,48,48,4,false);
-		//jsxel.sprite(img,50,100,48,0,48,48,4,false);
-		//jsxel.sprite(img,50,150,96,0,48,48,4,false);
-		//jsxel.sprite(img,50,150+50,96+48,0,48,48,4,false);
 	}
 	jsxel.run(draw,300);
 };
