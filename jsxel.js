@@ -17,9 +17,18 @@ jsxel = {
 	init: function(w,h,s){
 		this.size = s;
 		c = document.createElement("canvas");
-		c.width = w*this.size;
-		c.height = h*this.size;
 		ctx = c.getContext("2d");
+		
+		var devicePixelRatio = window.devicePixelRatio || 1;
+		var backingStoreRatio = ctx.webkitBackingStorePixelRatio || ctx.mozBackingStorePixelRatio || ctx.msBackingStorePixelRatio || ctx.oBackingStorePixelRatio || ctx.backingStorePixelRatio || 1; 
+		var ratio = devicePixelRatio / backingStoreRatio;
+		
+		c.width = w*this.size*ratio;
+		c.height = h*this.size*ratio;
+		c.style.width = w*this.size+'px';
+		c.style.height = h*this.size+'px';
+		ctx.scale(ratio, ratio);
+		
 		document.body.appendChild(c);
 	},
 	
@@ -41,9 +50,7 @@ jsxel = {
 	},
 
 	cls: function(col){
-		//setTimeout(ctx.clearRect(0,0,c.width,c.height),100);
 		ctx.fillStyle = col;
-		//setTimeout(ctx.fillRect(0,0,c.width,c.height),100);
 		ctx.fillRect(0,0,c.width,c.height)
 	},
 	
