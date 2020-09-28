@@ -105,4 +105,12 @@ jsxel = {
 		img.src = src;
 		return img;
 	},
+	
+	newau: function(src,noloop=false){
+		audio = document.createElement("audio");
+		audio.setAttribute("src",src);
+		audio.setAttribute("loop",noloop);
+		return audio;
+	},
+
 };

@@ -7,6 +7,8 @@ p1 = f(w,h,500,20);
 user = [{'name':'u1','x':3,'y':4,'zt':1,'color':8,'eat':0,'fx':0},
 	{'name':'u2','x':3,'y':5,'zt':1,'color':4,'eat':0,'fx':0},
 	{'name':'u3','x':3,'y':6,'zt':1,'color':5,'eat':0,'fx':0}]
+au1 = jsxel.newau("1.wav",false);
+au2 = jsxel.newau("2.wav",true);
 
 function f(w,h,s,e){
 	var point = [];
@@ -90,7 +92,8 @@ window.onload = function(){
 	jsxel.init(w,h,s);
 	img = jsxel.newimg("1.png");
 	img1 = jsxel.newimg("2.png");
-
+	au2.play();
+	
 	jsxel.touchstart(function(){
 		x = Math.floor(jsxel.e.touches[0].pageX);
 		y = Math.floor(jsxel.e.touches[0].pageY);
