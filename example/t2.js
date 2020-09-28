@@ -91,8 +91,6 @@ function move(p1,user){
 window.onload = function(){
 	jsxel.init(w,h,s);
 	img = jsxel.newimg("1.png");
-	//img.width = 96;
-	//img.height = 96;
 
 	jsxel.touchstart(function(){
 		x = Math.floor(jsxel.e.touches[0].pageX);
@@ -112,7 +110,6 @@ window.onload = function(){
 		}
 		for(i=0;i<user.length;i++){
 			if(user[i].zt == 1){
-				//jsxel.frect(user[i].x,user[i].y,1,1,jsxel.color[user[i].color]);
 				if(user[i].fx==0) jsxel.sprite(img,48*3,0,48,48,user[i].x*s,user[i].y*s,s,s,4,false);
 				if(user[i].fx==1) jsxel.sprite(img,0,0,48,48,user[i].x*s,user[i].y*s,s,s,4,false);
 				if(user[i].fx==2) jsxel.sprite(img,48,0,48,48,user[i].x*s,user[i].y*s,s,s,4,false);

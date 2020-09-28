@@ -85,6 +85,10 @@ jsxel = {
 	drawimg: function(img,x,y,w,h){
 		ctx.drawImage(img,x,y,w,h);
 	},
+	
+	drawimg: function(img,x0,y0,w0,h0,x,y,w,h){
+		ctx.drawImage(img,x0,y0,w0,h0,x,y,w,h);
+	},
 
 	//context.drawImage(img,sx,sy,swidth,sheight,x,y,width,height);
 	sprite: function(img,x0,y0,w0,h0,x,y,w,h,f,ish){
