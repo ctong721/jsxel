@@ -9,6 +9,7 @@ user = [{'name':'u1','x':3,'y':4,'zt':1,'color':8,'eat':0,'fx':0},
 	{'name':'u3','x':3,'y':6,'zt':1,'color':5,'eat':0,'fx':0}]
 au1 = jsxel.newau("1.wav",false);
 au2 = jsxel.newau("2.wav",true);
+au2isplay = true;
 
 function f(w,h,s,e){
 	var point = [];
@@ -97,6 +98,13 @@ window.onload = function(){
 	jsxel.touchstart(function(){
 		x = Math.floor(jsxel.e.touches[0].pageX);
 		y = Math.floor(jsxel.e.touches[0].pageY);
+		if(au2isplay){
+			au2.pause();
+			au2isplay=false;
+		}else{
+			au2.play();
+			au2isplay=true;
+		}
 	});
 	jsxel.touchmove(function(){
 		x = Math.floor(jsxel.e.touches[0].pageX);
