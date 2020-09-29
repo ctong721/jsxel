@@ -81,13 +81,13 @@ jsxel = {
 			f();
 		});
 	},
-
-	drawimg: function(img,x,y,w,h){
-		ctx.drawImage(img,x,y,w,h);
-	},
 	
 	drawimg: function(img,x0,y0,w0,h0,x,y,w,h){
-		ctx.drawImage(img,x0,y0,w0,h0,x,y,w,h);
+		if(x0==null && y0==null && w0==null && h0==null){
+			ctx.drawImage(img,x,y,w,h);
+		}else{
+			ctx.drawImage(img,x0,y0,w0,h0,x,y,w,h);
+		}
 	},
 
 	//context.drawImage(img,sx,sy,swidth,sheight,x,y,width,height);
@@ -104,6 +104,27 @@ jsxel = {
 		var img = new Image();
 		img.src = src;
 		return img;
+	},
+	
+	imgb64: function(img,x0,y0,w0,h0,w,h,callback){
+		//var _img = new Image(w,h);
+		var _c = document.createElement("canvas");
+		var _ctx = _c.getContext("2d");
+		_c.width = w;
+		_c.height = h;
+		_c.hidden = true;
+		
+		_ctx.drawImage(img,x0,y0,w0,h0,0,0,w,h);
+		//var imgData = _ctx.getImageData(0, 0, w, h);
+		//_ctx.putImageData(imgData, 0, 0);		
+		//_img.src = _c.toDataURL('image/png');
+		const _src = _c.toDataURL('image/png',0.9);
+		callback(_src);
+	},
+	
+	traimg: function(img,cstr){
+		//旋转180 rotate(180deg)
+		img.style.transform = cstr;
 	},
 	
 	newau: function(src,noloop=false){
