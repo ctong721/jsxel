@@ -8,6 +8,8 @@ jsxel = {
 	frame_count: 0,
 	
 	e: null,
+	
+	ratio: 1,
 
 	random: function(start,end){
 		var temp = start - end + 1;
@@ -21,13 +23,13 @@ jsxel = {
 		
 		var devicePixelRatio = window.devicePixelRatio || 1;
 		var backingStoreRatio = ctx.webkitBackingStorePixelRatio || ctx.mozBackingStorePixelRatio || ctx.msBackingStorePixelRatio || ctx.oBackingStorePixelRatio || ctx.backingStorePixelRatio || 1; 
-		var ratio = devicePixelRatio / backingStoreRatio;
+		this.ratio = devicePixelRatio / backingStoreRatio;
 		
-		c.width = w*this.size*ratio;
-		c.height = h*this.size*ratio;
+		c.width = w*this.size*this.ratio;
+		c.height = h*this.size*this.ratio;
 		c.style.width = w*this.size+'px';
 		c.style.height = h*this.size+'px';
-		ctx.scale(ratio, ratio);
+		ctx.scale(this.ratio, this.ratio);
 		
 		document.body.appendChild(c);
 	},
@@ -110,15 +112,17 @@ jsxel = {
 		//var _img = new Image(w,h);
 		var _c = document.createElement("canvas");
 		var _ctx = _c.getContext("2d");
-		_c.width = w;
-		_c.height = h;
-		_c.hidden = true;
+		_c.width = w*this.ratio;
+		_c.height = h*this.ratio;
+		_c.style.width = w+'px';
+		_c.style.height = h+'px';
+		_ctx.scale(this.ratio, this.ratio);
 		
 		_ctx.drawImage(img,x0,y0,w0,h0,0,0,w,h);
 		//var imgData = _ctx.getImageData(0, 0, w, h);
-		//_ctx.putImageData(imgData, 0, 0);		
+		//_ctx.putImageData(imgData, 0, 0);
 		//_img.src = _c.toDataURL('image/png');
-		const _src = _c.toDataURL('image/png',0.9);
+		var _src = _c.toDataURL('image/png');
 		callback(_src);
 	},
 	

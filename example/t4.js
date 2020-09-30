@@ -96,7 +96,7 @@ window.onload = function(){
 	img2 = new Image();
 	jsxel.imgb64(img,0,0,48,48,24,24,function(_src){
 		img2.src = _src;
-		//console.log(_src);
+		console.log(_src);
 	});
 	jsxel.traimg(img2,"rotate(180deg)");
 	document.body.append(img2);
