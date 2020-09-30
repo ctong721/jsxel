@@ -92,14 +92,18 @@ window.onload = function(){
 	jsxel.init(w,h,s);
 	img = jsxel.newimg("1.png");
 	img1 = jsxel.newimg("2.png");
+	img3 = jsxel.newimg("3.png");
 	
-	img2 = new Image();
-	jsxel.imgb64(img,0,0,48,48,24,24,function(_src){
-		img2.src = _src;
-		console.log(_src);
+	jsxel.getimg(img,0,0,48,48,48,48,function(_img){
+		img2 = _img;
 	});
 	jsxel.traimg(img2,"rotate(180deg)");
 	document.body.append(img2);
+	
+	jsxel.imgalpha(img3,0,0,128,128,128,128,null,function(_img){
+		img4 = _img;
+	});
+	document.body.append(img4);
 	
 	au2.play();
 	

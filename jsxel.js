@@ -108,8 +108,8 @@ jsxel = {
 		return img;
 	},
 	
-	imgb64: function(img,x0,y0,w0,h0,w,h,callback){
-		//var _img = new Image(w,h);
+	getimg: function(img,x0,y0,w0,h0,w,h,callback){
+		var _img = new Image(w,h);
 		var _c = document.createElement("canvas");
 		var _ctx = _c.getContext("2d");
 		_c.width = w*this.ratio;
@@ -117,13 +117,46 @@ jsxel = {
 		_c.style.width = w+'px';
 		_c.style.height = h+'px';
 		_ctx.scale(this.ratio, this.ratio);
-		
 		_ctx.drawImage(img,x0,y0,w0,h0,0,0,w,h);
-		//var imgData = _ctx.getImageData(0, 0, w, h);
-		//_ctx.putImageData(imgData, 0, 0);
-		//_img.src = _c.toDataURL('image/png');
-		var _src = _c.toDataURL('image/png');
-		callback(_src);
+		_img.src = _c.toDataURL('image/png');
+		callback(_img);
+	},
+	
+	imgalpha: function(img,x0,y0,w0,h0,w,h,agba,callback){
+		var _img = new Image(w,h);
+		var _c = document.createElement("canvas");
+		var _ctx = _c.getContext("2d");
+		_c.width = w*this.ratio;
+		_c.height = h*this.ratio;
+		_c.style.width = w+'px';
+		_c.style.height = h+'px';
+		_ctx.scale(this.ratio, this.ratio);
+		_ctx.drawImage(img,x0,y0,w0,h0,0,0,w,h);
+		const tolerance = 60;
+		var r, g, b, a;
+		var r0, g0, b0, a0;
+		var imgData = _ctx.getImageData(0, 0, _c.width, _c.height);
+		if(agba==null){
+			[r0, g0, b0, a0] = [imgData.data[0],imgData.data[1],imgData.data[2],imgData.data[3]];
+		}else{
+			[r0, g0, b0, a0] = agba;
+		}
+		for (i = 0; i < imgData.data.length; i += 4) {
+			r = imgData.data[i];
+			g = imgData.data[i + 1];
+			b = imgData.data[i + 2];
+			a = imgData.data[i + 3];
+			var t = Math.sqrt((r - r0) ** 2 + (g - g0) ** 2 + (b - b0) ** 2 + (a - a0) ** 2);
+			if (t <= tolerance) {
+				imgData.data[i] = 0;
+				imgData.data[i + 1] = 0;
+				imgData.data[i + 2] = 0;
+				imgData.data[i + 3] = 0;
+			}
+		}
+		_ctx.putImageData(imgData, 0, 0);
+		_img.src = _c.toDataURL('image/png');
+		callback(_img);
 	},
 	
 	traimg: function(img,cstr){
